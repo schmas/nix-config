@@ -9,7 +9,6 @@
       "proton-pass"
       "protonvpn"
       "tunnelblick"
-      "yubico-yubikey-manager"
 
       # Productivity & Utilities
       "alfred"
