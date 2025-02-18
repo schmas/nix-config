@@ -51,6 +51,10 @@
 
     # Development tools
     mise # asdf replacement
+    podman # Container runtime
+    podman-tui # Terminal UI for podman
+    podman-compose # Compose tool for podman
+
 
     # Security and encryption
     age # Simple, modern file encryption tool
