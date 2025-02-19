@@ -21,6 +21,7 @@ nix run nix-darwin -- switch --flake ~/.config/dotfiles_nix#macos
 nix run nix-darwin -- switch --flake ~/.config/dotfiles_nix#macos-testing
 
 # Now install the dotfiles
+op
 chezmoi init --apply schmas
 ```
 
