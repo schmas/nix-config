@@ -104,7 +104,7 @@ in {
     brews = brews;
     casks = if isTesting then testingCasks else fullCasks;
     onActivation = {
-      #cleanup = "zap";
+      cleanup = "zap";
       autoUpdate = true;
       upgrade = true;
     };

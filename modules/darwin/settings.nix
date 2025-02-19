@@ -90,6 +90,7 @@
       { type = "spacer"; }
       { path = "/Applications/Ghostty.app/"; }
       { path = "${pkgs.vscode}/Applications/Visual Studio Code.app/"; }
+      { type = "spacer"; }
       {
         path = "${config.users.users.${user}.home}/";
         section = "others";
