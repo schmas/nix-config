@@ -16,6 +16,12 @@ xcode-select --install
 ```bash
 git clone https://github.com/schmas/dotfiles_nix.git ~/.config/dotfiles_nix
 nix run nix-darwin -- switch --flake ~/.config/dotfiles_nix#macos
+
+# or for testing, it will install only a few cask packages
+nix run nix-darwin -- switch --flake ~/.config/dotfiles_nix#macos-testing
+
+# Now install the dotfiles
+chezmoi init --apply schmas
 ```
 
 ## Updating packages
@@ -29,6 +35,6 @@ nix flake update --flake ~/.config/dotfiles_nix && darwin-rebuild switch --flake
 - [ ] Add `nvim` setup, clone `nvim-config` repo
 - [ ] Add overlays for `nixpkgs` packages
 - [ ] Use packages as arrays
-- [ ] Remove chezmoi from home.activation
+- [x] Remove chezmoi from home.activation
 - [ ] Setup MacOS Dock Apps
 - [ ] Mac Backup apps settings

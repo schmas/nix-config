@@ -28,11 +28,12 @@
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, nix-homebrew
     , homebrew-bundle, homebrew-core, homebrew-cask, ... }@inputs:
-    let user = "schmas";
-    in {
-      darwinConfigurations."macos" = nix-darwin.lib.darwinSystem {
+    let
+      user = "schmas";
+
+      mkDarwinSystem = { isTesting ? false }: nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        specialArgs = inputs // { inherit self user; };
+        specialArgs = inputs // { inherit self user isTesting; };  # Pass isTesting
         modules = [
           ./hosts/darwin
           home-manager.darwinModules.home-manager
@@ -45,6 +46,12 @@
               import ./modules/darwin/home-manager.nix { inherit pkgs lib user config; };
           }
         ];
+      };
+
+    in {
+      darwinConfigurations = {
+        "macos" = mkDarwinSystem { isTesting = false; };
+        "macos-testing" = mkDarwinSystem { isTesting = true; };
       };
 
       nixosConfigurations."ubuntu" = nixpkgs.lib.nixosSystem {

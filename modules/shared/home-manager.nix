@@ -126,20 +126,20 @@ in
   # systemd.user.startServices = "sd-switch";
 
   # Chezmoi integration
-  home.activation = {
-    chezmoiIntegration = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      echo "Configuring dotfiles..."
-      echo "Shell: $SHELL"
+  # home.activation = {
+  #   chezmoiIntegration = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  #     echo "Configuring dotfiles..."
+  #     echo "Shell: $SHELL"
 
-      export PATH="${
-          lib.makeBinPath (with pkgs; [ git _1password-cli atuin fzf ])
-        }:$PATH"
+  #     export PATH="${
+  #         lib.makeBinPath (with pkgs; [ git _1password-cli atuin fzf ])
+  #       }:$PATH"
 
-      if [ ! -d "$HOME/.local/share/chezmoi" ]; then
-        run ${pkgs.chezmoi}/bin/chezmoi init --apply ${user}
-      else
-        run ${pkgs.chezmoi}/bin/chezmoi update
-      fi
-    '';
-  };
+  #     if [ ! -d "$HOME/.local/share/chezmoi" ]; then
+  #       run ${pkgs.chezmoi}/bin/chezmoi init --apply ${user}
+  #     else
+  #       run ${pkgs.chezmoi}/bin/chezmoi update
+  #     fi
+  #   '';
+  # };
 }

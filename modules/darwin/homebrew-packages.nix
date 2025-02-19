@@ -1,8 +1,13 @@
-{ pkgs, ... }: {
-  homebrew = {
-    enable = true;
-    brews = [ "urlview" "mise" "openssl" ];
-    casks = [
+{ pkgs, isTesting ? false, ... }:
+
+let
+  brews = [ "urlview" "mise" "openssl" ];
+
+  testingCasks = [
+    "ghostty"
+    "zed"
+  ];
+  fullCasks = [
       # Security & Privacy
       "1password"
       "gpg-suite-no-mail"
@@ -67,6 +72,13 @@
       # Microsoft
       # "microsoft-auto-update"
     ];
+in
+{
+
+  homebrew = {
+    enable = true;
+    brews = brews;
+    casks = if isTesting then testingCasks else fullCasks;
     onActivation = {
       #cleanup = "zap";
       autoUpdate = true;
