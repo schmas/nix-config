@@ -12,11 +12,9 @@ in
   # homeDirectory = "/Users/${user}";
 
   # Darwin-specific packages
-  # home.packages = with pkgs; [
-  #   coreutils
-  #   gnused
-  #   iterm2
-  # ];
+  home.packages = with pkgs; [
+    vscode
+  ];
 
   # Darwin-specific program configurations
   # programs = {

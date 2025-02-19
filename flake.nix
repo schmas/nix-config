@@ -24,10 +24,11 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    mac-app-util.url = "github:hraban/mac-app-util";
   };
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, nix-homebrew
-    , homebrew-bundle, homebrew-core, homebrew-cask, ... }@inputs:
+    , homebrew-bundle, homebrew-core, homebrew-cask, mac-app-util, ... }@inputs:
     let
       user = "schmas";
 
@@ -36,9 +37,13 @@
         specialArgs = inputs // { inherit self user isTesting; };  # Pass isTesting
         modules = [
           ./hosts/darwin
+          mac-app-util.darwinModules.default
           home-manager.darwinModules.home-manager
           {
             home-manager.extraSpecialArgs = { inherit user; };
+            home-manager.sharedModules = [
+                mac-app-util.homeManagerModules.default
+              ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";

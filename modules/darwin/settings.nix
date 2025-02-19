@@ -81,28 +81,23 @@
     # Fully declarative dock using the latest from Nix Store
     local.dock.enable = true;
     local.dock.entries = [
-      { path = "/Applications/Reminders.app/"; }
-      { path = "/Applications/Notes.app/"; }
+      { path = "/System/Applications/Launchpad.app/"; }
+      { path = "/System//Applications/Reminders.app/"; }
+      { path = "/System//Applications/Notes.app/"; }
+      { path = "/System/Applications/Messages.app/"; }
+      { path = "/System/Applications/iPhone Mirroring.app/"; }
+      { path = "/System/Applications/System Settings.app/"; }
+      { path = "/Applications/Ghostty.app/"; }
+      { path = "/Users/schmas/Applications/Home Manager Trampolines/Visual Studio Code.app/"; }
       {
-        path = "/System/Applications/Messages.app/";
-      }
-      # { path = "/System/Applications/Facetime.app/"; }
-      # { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
-      # { path = "/System/Applications/Music.app/"; }
-      # { path = "/System/Applications/News.app/"; }
-      # { path = "/System/Applications/Photos.app/"; }
-      # { path = "/System/Applications/Photo Booth.app/"; }
-      # { path = "/System/Applications/TV.app/"; }
-      # { path = "/System/Applications/Home.app/"; }
-      {
-        path = "${config.users.users.${user}.home}/.local/share/";
+        path = "${config.users.users.${user}.home}/";
         section = "others";
-        options = "--sort name --view grid --display folder";
+        options = "--sort name --view list --display folder";
       }
       {
-        path = "${config.users.users.${user}.home}/.local/share/downloads";
+        path = "${config.users.users.${user}.home}/Downloads/";
         section = "others";
-        options = "--sort name --view grid --display stack";
+        options = "--sort dateadded --view list --display folder";
       }
     ];
   };

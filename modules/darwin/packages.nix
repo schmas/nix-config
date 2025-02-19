@@ -2,7 +2,7 @@
 
 let
   # Darwin-specific packages
-  darwinSpecificPackages = with pkgs; [ dockutil vscode ];
+  darwinSpecificPackages = with pkgs; [ dockutil ];
 
   # Brew packages
   brews = [ "urlview" "mise" "openssl" ];
@@ -10,6 +10,7 @@ let
   # Casks
   testingCasks = [
     "1password"
+    "google-chrome"
     "ghostty"
     "zed"
   ];
