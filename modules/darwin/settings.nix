@@ -49,6 +49,14 @@
           ShowPathbar = true;
           ShowStatusBar = true;
           FXRemoveOldTrashItems = true;
+
+          # Keep folders on top
+          _FXSortFoldersFirst = true;    # Keep folders on top when sorting by name
+          _FXSortFoldersFirstOnDesktop = true;  # Keep folders on top on Desktop too
+
+          # New window behavior
+          NewWindowTarget = "Home";      # "PfHm" represents the Home folder
+          # NewWindowTargetPath = "file://${config.users.primaryUser.home}";  # Sets the specific path
         };
 
         trackpad = {
