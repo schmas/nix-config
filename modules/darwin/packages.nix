@@ -9,6 +9,7 @@ let
 
   # Casks
   testingCasks = [
+    "1password"
     "ghostty"
     "zed"
   ];
