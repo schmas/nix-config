@@ -46,6 +46,9 @@
           FXEnableExtensionChangeWarning = false;
           QuitMenuItem = true;
           FXPreferredViewStyle = "Nlsv";
+          ShowPathbar = true;
+          ShowStatusBar = true;
+          FXRemoveOldTrashItems = true;
         };
 
         trackpad = {
