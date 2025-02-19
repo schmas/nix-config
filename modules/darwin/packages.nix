@@ -2,7 +2,7 @@
 
 let
   # Darwin-specific packages
-  darwinSpecificPackages = with pkgs; [ dockutil ];
+  darwinSpecificPackages = with pkgs; [ dockutil vscode ];
 
   # Brew packages
   brews = [ "urlview" "mise" "openssl" ];
