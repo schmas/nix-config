@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./homebrew-packages.nix
     ./packages.nix
     ./settings.nix
     nix-homebrew.darwinModules.nix-homebrew
