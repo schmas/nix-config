@@ -14,10 +14,11 @@ xcode-select --install
 ## Configure environment
 
 ```bash
-git clone https://github.com/schmas/dotfiles_nix.git ~/.config/dotfiles_nix
+git clone https://github.com/schmas/dotfiles_nix.git ~/.config/dotfiles_nix &&
 nix run nix-darwin -- switch --flake ~/.config/dotfiles_nix#macos
 
 # or for testing, it will install only a few cask packages
+git clone https://github.com/schmas/dotfiles_nix.git ~/.config/dotfiles_nix &&
 nix run nix-darwin -- switch --flake ~/.config/dotfiles_nix#macos-testing
 
 # Now install the dotfiles

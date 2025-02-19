@@ -20,7 +20,7 @@
 
   nix-homebrew = {
     enable = true;
-    # enableRosetta = true;
+    enableRosetta = true;
     user = "${user}";
     taps = {
       "homebrew/homebrew-core" = homebrew-core;
