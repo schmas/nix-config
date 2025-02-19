@@ -1,4 +1,4 @@
-{ config, user, ... }: {
+{ config, user, pkgs, ... }: {
   imports = [ ./dock ];
 
   config = {
@@ -82,13 +82,14 @@
     local.dock.enable = true;
     local.dock.entries = [
       { path = "/System/Applications/Launchpad.app/"; }
-      { path = "/System//Applications/Reminders.app/"; }
-      { path = "/System//Applications/Notes.app/"; }
+      { path = "/System/Applications/Reminders.app/"; }
+      { path = "/System/Applications/Notes.app/"; }
       { path = "/System/Applications/Messages.app/"; }
       { path = "/System/Applications/iPhone Mirroring.app/"; }
       { path = "/System/Applications/System Settings.app/"; }
+      { type = "spacer"; }
       { path = "/Applications/Ghostty.app/"; }
-      { path = "/Users/schmas/Applications/Home Manager Trampolines/Visual Studio Code.app/"; }
+      { path = "${pkgs.vscode}/Applications/Visual Studio Code.app/"; }
       {
         path = "${config.users.users.${user}.home}/";
         section = "others";
