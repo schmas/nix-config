@@ -49,6 +49,7 @@
           ShowPathbar = true;
           ShowStatusBar = true;
           FXRemoveOldTrashItems = true;
+          FXDefaultSearchScope = "SCcf";
 
           # Keep folders on top
           _FXSortFoldersFirst = true;    # Keep folders on top when sorting by name
