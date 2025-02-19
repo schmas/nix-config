@@ -38,5 +38,5 @@ nix flake update --flake ~/.config/dotfiles_nix && darwin-rebuild switch --flake
 - [ ] Add overlays for `nixpkgs` packages
 - [ ] Use packages as arrays
 - [x] Remove chezmoi from home.activation
-- [ ] Setup MacOS Dock Apps
+- [x] Setup MacOS Dock Apps
 - [ ] Mac Backup apps settings
