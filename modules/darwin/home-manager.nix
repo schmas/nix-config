@@ -3,8 +3,7 @@
 let
   commonAliases = {
     update-nix = "git -C ~/.config/dotfiles_nix pull && darwin-rebuild switch --flake ~/.config/dotfiles_nix#macos";
-    update-nix-test = "git -C ~/.config/dotfiles_nix pull && darwin-rebuild test --flake ~/.config/dotfiles_nix#macos";
-    update-nix-boot = "git -C ~/.config/dotfiles_nix pull && darwin-rebuild boot --flake ~/.config/dotfiles_nix#macos";
+    update-nix-test = "git -C ~/.config/dotfiles_nix pull && darwin-rebuild switch --flake ~/.config/dotfiles_nix#macos-testing";
   };
 in
 {

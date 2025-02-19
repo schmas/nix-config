@@ -9,6 +9,7 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 
 # if macos install Command Line Tools
 xcode-select --install
+softwareupdate --install-rosetta
 ```
 
 ## Configure environment
