@@ -1,8 +1,9 @@
 { pkgs, isTesting ? false, ... }:
 
+with pkgs;
 let
   # Darwin-specific packages
-  darwinSpecificPackages = with pkgs; [ dockutil ];
+  darwinSpecificPackages = with pkgs; [ dockutil vscode ];
 
   # Brew packages
   brews = [ "urlview" "mise" "openssl" ];
@@ -84,29 +85,16 @@ let
   sharedPackages = import ../shared/packages.nix { inherit pkgs; };
 
   # Combine shared packages with Darwin-specific packages
-  allPackages = sharedPackages.environment.systemPackages
-    ++ darwinSpecificPackages;
-
-  # Get the list of Homebrew package names
-  homebrewPackageNames = brews;
+  allPackages = sharedPackages ++ darwinSpecificPackages;
 
   # Filter out packages that are in Homebrew from all packages
   filteredPackages = builtins.filter
-    (pkg: !(builtins.elem (pkg.pname or pkg.name) homebrewPackageNames))
+    (pkg: !(builtins.elem (pkg.pname or pkg.name) brews))
     allPackages;
 
+  # debug = builtins.trace "Shared packages: ${toString (map (p: p.name or p.pname) sharedPackages)}" true;
 in {
-  # System packages that are not in Homebrew
-  environment.systemPackages = filteredPackages;
-
-  homebrew = {
-    enable = true;
-    brews = brews;
-    casks = if isTesting then testingCasks else fullCasks;
-    onActivation = {
-      cleanup = "zap";
-      autoUpdate = true;
-      upgrade = true;
-    };
-  };
+  packages = filteredPackages;
+  inherit brews;
+  casks = if isTesting then testingCasks else fullCasks;
 }

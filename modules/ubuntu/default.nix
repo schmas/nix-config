@@ -1,6 +1,8 @@
 { user, pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; [ mise ];
+  imports = [
+    ./packages.nix
+  ];
 
   users.users.${user} = {
     isNormalUser = true;

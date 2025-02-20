@@ -1,32 +1,17 @@
-{ user, config, pkgs, ... }:
+{ user, config, pkgs, lib, isTesting ? false, ... }:
 
 let
   commonAliases = {
     update-nix = "git -C ~/.config/dotfiles_nix pull && darwin-rebuild switch --flake ~/.config/dotfiles_nix#macos";
     update-nix-test = "git -C ~/.config/dotfiles_nix pull && darwin-rebuild switch --flake ~/.config/dotfiles_nix#macos-testing";
   };
+
+  darwinPackages = pkgs.callPackage ./packages.nix { inherit isTesting; };
 in
 {
   imports = [ ../shared/home-manager.nix ];
 
-  # homeDirectory = "/Users/${user}";
-
-  # Darwin-specific packages
-  home.packages = with pkgs; [
-    vscode
-  ];
-
-  # Darwin-specific program configurations
-  # programs = {
-  #   alacritty = {
-  #     enable = true;
-  #     settings = {
-  #       # Your Alacritty settings here
-  #     };
-  #   };
-  # };
-
-  # Any other Darwin-specific configurations
+  home.packages = darwinPackages.packages;
 
   programs = {
     bash.shellAliases = commonAliases;

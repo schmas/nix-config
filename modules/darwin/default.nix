@@ -1,8 +1,10 @@
-{ user, pkgs, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, ... }:
+{ user, pkgs, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, isTesting, ... }:
 
+let
+  darwinPackages = pkgs.callPackage ./packages.nix { inherit isTesting; };
+in
 {
   imports = [
-    ./packages.nix
     ./settings.nix
     nix-homebrew.darwinModules.nix-homebrew
   ];
@@ -28,5 +30,16 @@
     };
     mutableTaps = false;
     autoMigrate = true;
+  };
+
+  homebrew = {
+    enable = true;
+    brews = darwinPackages.brews;
+    casks = darwinPackages.casks;
+    onActivation = {
+      cleanup = "zap";
+      autoUpdate = true;
+      upgrade = true;
+    };
   };
 }

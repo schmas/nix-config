@@ -40,15 +40,17 @@
           mac-app-util.darwinModules.default
           home-manager.darwinModules.home-manager
           {
-            home-manager.extraSpecialArgs = { inherit user; };
+            home-manager.extraSpecialArgs = { inherit user isTesting; };
             home-manager.sharedModules = [
                 mac-app-util.homeManagerModules.default
               ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
-            home-manager.users.${user} = { pkgs, lib, config, user, ... }:
-              import ./modules/darwin/home-manager.nix { inherit pkgs lib user config; };
+            home-manager.users.${user} = { pkgs, lib, config, user, isTesting, ... }:
+              import ./modules/darwin/home-manager.nix {
+                inherit pkgs lib user config isTesting;
+              };
           }
         ];
       };
