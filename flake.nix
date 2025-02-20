@@ -24,7 +24,7 @@
     # Nix ecosystem
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-    systems.url = "github:nix-systems/default-linux";
+    systems.url = "github:nix-systems/default";
 
     hardware.url = "github:nixos/nixos-hardware";
 
@@ -104,21 +104,21 @@
       #   # };
       # };
 
-      # homeConfigurations = {
-      #   # Standalone HM only
-      #   # Work laptop
-      #   "schmas@macbook" = lib.homeManagerConfiguration {
-      #     modules = [ ./home/schmas/macos.nix ./home/schmas/nixpkgs.nix ];
-      #     pkgs = pkgsFor.aarch64-darwin;
-      #     extraSpecialArgs = { inherit inputs outputs; };
-      #   };
+      homeConfigurations = {
+        # Standalone HM only
+        # Work laptop
+        "schmas@macbook" = lib.homeManagerConfiguration {
+          modules = [ ./home/schmas/macos.nix ./home/schmas/nixpkgs.nix ];
+          pkgs = pkgsFor.aarch64-darwin;
+          extraSpecialArgs = { inherit inputs outputs; };
+        };
 
-      #   # # Work desktop
-      #   # "schmas@popos" = lib.homeManagerConfiguration {
-      #   #   modules = [ ./home/schmas/popos.nix ./home/schmas/nixpkgs.nix ];
-      #   #   pkgs = pkgsFor.x86_64-linux;
-      #   #   extraSpecialArgs = { inherit inputs outputs; };
-      #   # };
-      # };
+        # # Work desktop
+        # "schmas@popos" = lib.homeManagerConfiguration {
+        #   modules = [ ./home/schmas/popos.nix ./home/schmas/nixpkgs.nix ];
+        #   pkgs = pkgsFor.x86_64-linux;
+        #   extraSpecialArgs = { inherit inputs outputs; };
+        # };
+      };
     };
 }
