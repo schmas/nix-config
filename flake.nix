@@ -59,9 +59,10 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-darwin, systems, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-darwin, mac-app-util, systems, ... }@inputs:
     let
       inherit (self) outputs;
+      user = "schmas";
       lib = nixpkgs.lib // home-manager.lib // nix-darwin.lib;
       forEachSystem = f:
         lib.genAttrs (import systems) (system: f pkgsFor.${system});
@@ -72,7 +73,9 @@
         });
     in {
       inherit lib;
+      inherit user;
       nixosModules = import ./modules/nixos;
+      darwinModules = import ./modules/darwin;
       homeManagerModules = import ./modules/home-manager;
 
       overlays = import ./overlays { inherit inputs outputs; };
@@ -85,7 +88,7 @@
         # Personal/Work laptop
         macbook = lib.darwinSystem {
           system = "aarch64-darwin";
-          modules = [ ./hosts/macbook ];
+          modules = [mac-app-util.darwinModules.default ./hosts/macbook ];
           specialArgs = { inherit inputs outputs; };
         };
 
@@ -108,7 +111,7 @@
         # Standalone HM only
         # Work laptop
         "schmas@macbook" = lib.homeManagerConfiguration {
-          modules = [ ./home/schmas/macos.nix ./home/schmas/nixpkgs.nix ];
+          modules = [mac-app-util.homeManagerModules.default ./home/schmas/macos.nix ./home/schmas/nixpkgs.nix ];
           pkgs = pkgsFor.aarch64-darwin;
           extraSpecialArgs = { inherit inputs outputs; };
         };
