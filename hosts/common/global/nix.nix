@@ -27,7 +27,6 @@ in
       trusted-users = [
         "root"
         "@wheel"
-        "@admin"
       ];
 
       experimental-features = [

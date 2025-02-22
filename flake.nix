@@ -16,6 +16,8 @@
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "tree-grepper.cachix.org-1:Tm/owXM+dl3GnT8gZg+GTI3AW+yX1XFVYXspZa7ejHg="
     ];
+
+    trusted-users = [ "root" "@admin" "schmas" ];
   };
 
   inputs = {
@@ -107,7 +109,10 @@
             mac-app-util.darwinModules.default
             ./hosts/vesuvio
           ];
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+            isTesting = false;
+          };
         };
 
         "vesuvio-test" = lib.darwinSystem {

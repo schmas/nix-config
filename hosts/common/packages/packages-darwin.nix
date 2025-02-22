@@ -1,6 +1,6 @@
 {
   pkgs,
-  isTesting ? false,
+  isTesting ? true,
   ...
 }:
 

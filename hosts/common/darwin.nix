@@ -18,6 +18,12 @@
       ./settings.nix
     ];
 
+  nix = {
+    settings = {
+      trusted-users = [ "@admin" "${user}" ];
+    };
+  };
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
