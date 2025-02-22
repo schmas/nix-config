@@ -6,7 +6,7 @@
   ...
 }:
 let
-  packages = import ../common/packages.nix { inherit pkgs; };
+  darwinPackages = import ../common/packages/packages-darwin.nix { inherit pkgs; };
 in
 {
   imports = [
@@ -40,20 +40,20 @@ in
     users = {
       schmas = { inputs, outputs, pkgs, ... }: {
         imports = [ ../../home/schmas/vesuvio.nix ];
-        home.packages = packages.all-packages;
+        home.packages = darwinPackages.packages;
       };
     };
   };
 
-  # homebrew = {
-  #   enable = true;
-  #   # brews = darwinPackages.brews;
-  #   # casks = darwinPackages.casks;
-  #   onActivation = {
-  #     cleanup = "zap";
-  #     autoUpdate = true;
-  #     upgrade = true;
-  #   };
-  # };
+  homebrew = {
+    enable = true;
+    brews = darwinPackages.brews;
+    casks = darwinPackages.casks;
+    onActivation = {
+      cleanup = "zap";
+      autoUpdate = true;
+      upgrade = true;
+    };
+  };
 
 }
