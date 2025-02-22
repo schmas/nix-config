@@ -9,18 +9,18 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 
 # if macos install Command Line Tools
 xcode-select --install
-softwareupdate --install-rosetta
+softwareupdate --install-rosetta --agree-to-license
 ```
 
 ## Configure environment
 
 ```bash
-git clone https://github.com/schmas/dotfiles_nix.git ~/.config/dotfiles_nix &&
-nix run nix-darwin -- switch --flake ~/.config/dotfiles_nix#macos
+git clone https://github.com/schmas/nix-config.git ~/.config/nix-config &&
+nix run nix-darwin -- switch --flake ~/.config/nix-config#vesuvio
 
 # or for testing, it will install only a few cask packages
-git clone https://github.com/schmas/dotfiles_nix.git ~/.config/dotfiles_nix &&
-nix run nix-darwin -- switch --flake ~/.config/dotfiles_nix#macos-testing
+git clone https://github.com/schmas/nix-config.git ~/.config/nix-config &&
+nix run nix-darwin -- switch --flake ~/.config/nix-config#vesuvio-test
 
 # Now install the dotfiles
 chezmoi init --apply schmas
@@ -29,7 +29,7 @@ chezmoi init --apply schmas
 ## Updating packages
 
 ```bash
-nix flake update --flake ~/.config/dotfiles_nix && darwin-rebuild switch --flake ~/.config/dotfiles_nix#macos
+nix flake update --flake ~/.config/nix-config && darwin-rebuild switch --flake ~/.config/nix-config#vesuvio
 ```
 
 ## To Do

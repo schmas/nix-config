@@ -7,10 +7,15 @@
   ...
 }:
 {
-  imports = [ inputs.home-manager.darwinModules.home-manager inputs.nix-homebrew.darwinModules.nix-homebrew ]
+  imports =
+    [
+      inputs.home-manager.darwinModules.home-manager
+      inputs.nix-homebrew.darwinModules.nix-homebrew
+    ]
     ++ (builtins.attrValues outputs.darwinModules)
     ++ [
       ./global
+      ./settings.nix
     ];
 
   home-manager = {
@@ -23,7 +28,6 @@
 
   nix-homebrew = {
     enable = true;
-
     enableRosetta = true;
     user = "${user}";
     taps = {

@@ -101,13 +101,25 @@
 
       darwinConfigurations = {
         # Personal/Work laptop
-        vesuvio = lib.darwinSystem {
+        "vesuvio" = lib.darwinSystem {
           system = "aarch64-darwin";
           modules = [
             mac-app-util.darwinModules.default
             ./hosts/vesuvio
           ];
           specialArgs = { inherit inputs outputs; };
+        };
+
+        "vesuvio-test" = lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            mac-app-util.darwinModules.default
+            ./hosts/vesuvio
+          ];
+          specialArgs = {
+            inherit inputs outputs;
+            isTesting = true;
+          };
         };
 
         # Work desktop
@@ -125,25 +137,25 @@
       #   # };
       # };
 
-      homeConfigurations = {
-        # Standalone HM only
-        # Work laptop
-        "schmas@vesuvio" = lib.homeManagerConfiguration {
-          modules = [
-            mac-app-util.homeManagerModules.default
-            ./home/schmas/macos.nix
-            ./home/schmas/nixpkgs.nix
-          ];
-          pkgs = pkgsFor.aarch64-darwin;
-          extraSpecialArgs = { inherit inputs outputs; };
-        };
+      # homeConfigurations = {
+      #   # Standalone HM only
+      #   # Work laptop
+      #   "schmas@vesuvio" = lib.homeManagerConfiguration {
+      #     modules = [
+      #       mac-app-util.homeManagerModules.default
+      #       ./home/schmas/macos.nix
+      #       ./home/schmas/nixpkgs.nix
+      #     ];
+      #     pkgs = pkgsFor.aarch64-darwin;
+      #     extraSpecialArgs = { inherit inputs outputs; };
+      #   };
 
-        # # Work desktop
-        # "schmas@popos" = lib.homeManagerConfiguration {
-        #   modules = [ ./home/schmas/popos.nix ./home/schmas/nixpkgs.nix ];
-        #   pkgs = pkgsFor.x86_64-linux;
-        #   extraSpecialArgs = { inherit inputs outputs; };
-        # };
-      };
+      #   # # Work desktop
+      #   # "schmas@popos" = lib.homeManagerConfiguration {
+      #   #   modules = [ ./home/schmas/popos.nix ./home/schmas/nixpkgs.nix ];
+      #   #   pkgs = pkgsFor.x86_64-linux;
+      #   #   extraSpecialArgs = { inherit inputs outputs; };
+      #   # };
+      # };
     };
 }
