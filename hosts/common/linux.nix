@@ -5,7 +5,7 @@
     [ inputs.home-manager.nixosModules.home-manager ]
     ++ (builtins.attrValues outputs.nixosModules)
     ++ [
-      ./common.nix
+      ./global
     ];
 
   home-manager.useGlobalPkgs = true;

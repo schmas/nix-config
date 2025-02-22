@@ -7,7 +7,7 @@
     ]
     ++ (builtins.attrValues outputs.darwinModules)
     ++ [
-      ./common.nix
+      ./global
     ];
 
   home-manager = {

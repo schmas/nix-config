@@ -1,15 +1,19 @@
-# hosts/macbook/default.nix
+# hosts/vesuvio/default.nix
 { pkgs, inputs, outputs, ... }:
 
 {
   imports = [
-    ../common/global/darwin.nix
+    ../common/darwin.nix
   ];
 
   # Set Git commit hash for darwin-version.
   system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
 
   system.stateVersion = 6;
+
+  networking = {
+    hostName = "vesuvio";
+  };
 
   # It me
   # Set fish as the default shell
@@ -18,13 +22,11 @@
     home = "/Users/${outputs.user}";
     uid = 501;
     isHidden = false;
-    # shell = pkgs.fish;
+    shell = pkgs.fish;
   };
 
   home-manager = {
-    # This is optional, can be removed if you want to use home-manager's only
     users = {
-      # Import your home-manager configuration
       schmas = import ../../home/${outputs.user}/macos.nix;
     };
   };

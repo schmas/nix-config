@@ -1,6 +1,23 @@
 {
   description = "My Nix configuration";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://cache.m7.rs"
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+      "https://tree-grepper.cachix.org"
+    ];
+
+    # cachix use tree-grepper -O /tmp/cachix-conf
+    trusted-public-keys = [
+      "cache.m7.rs:kszZ/NSwE/TjhOcPPQ16IuUiuRSisdiIwhKZCxguaWg="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "tree-grepper.cachix.org-1:Tm/owXM+dl3GnT8gZg+GTI3AW+yX1XFVYXspZa7ejHg="
+    ];
+  };
+
   inputs = {
     # Nix ecosystem
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -23,7 +40,9 @@
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-homebrew = { url = "github:zhaofengli-wip/nix-homebrew"; };
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+    };
     homebrew-bundle = {
       url = "github:homebrew/homebrew-bundle";
       flake = false;
@@ -40,19 +59,30 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-darwin, mac-app-util, systems, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nix-darwin,
+      mac-app-util,
+      systems,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
       user = "schmas";
       lib = nixpkgs.lib // home-manager.lib // nix-darwin.lib;
-      forEachSystem = f:
-        lib.genAttrs (import systems) (system: f pkgsFor.${system});
-      pkgsFor = lib.genAttrs (import systems) (system:
+      forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
+      pkgsFor = lib.genAttrs (import systems) (
+        system:
         import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-        });
-    in {
+        }
+      );
+    in
+    {
       inherit lib;
       inherit user;
       nixosModules = import ./modules/nixos;
@@ -67,9 +97,12 @@
 
       darwinConfigurations = {
         # Personal/Work laptop
-        macbook = lib.darwinSystem {
+        vesuvio = lib.darwinSystem {
           system = "aarch64-darwin";
-          modules = [mac-app-util.darwinModules.default ./hosts/macbook ];
+          modules = [
+            mac-app-util.darwinModules.default
+            ./hosts/vesuvio
+          ];
           specialArgs = { inherit inputs outputs; };
         };
 
@@ -91,8 +124,12 @@
       homeConfigurations = {
         # Standalone HM only
         # Work laptop
-        "schmas@macbook" = lib.homeManagerConfiguration {
-          modules = [mac-app-util.homeManagerModules.default ./home/schmas/macos.nix ./home/schmas/nixpkgs.nix ];
+        "schmas@vesuvio" = lib.homeManagerConfiguration {
+          modules = [
+            mac-app-util.homeManagerModules.default
+            ./home/schmas/macos.nix
+            ./home/schmas/nixpkgs.nix
+          ];
           pkgs = pkgsFor.aarch64-darwin;
           extraSpecialArgs = { inherit inputs outputs; };
         };

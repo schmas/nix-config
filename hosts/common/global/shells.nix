@@ -1,0 +1,13 @@
+{
+  programs.bash.enable = true;
+  programs.zsh.enable = true;
+
+  programs.fish = {
+    enable = true;
+    vendor = {
+      completions.enable = true;
+      config.enable = true;
+      functions.enable = true;
+    };
+  };
+}
