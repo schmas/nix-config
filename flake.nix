@@ -65,6 +65,10 @@
       nixpkgs,
       home-manager,
       nix-darwin,
+      nix-homebrew,
+      homebrew-bundle,
+      homebrew-core,
+      homebrew-cask,
       mac-app-util,
       systems,
       ...

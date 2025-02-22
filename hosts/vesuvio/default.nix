@@ -1,10 +1,21 @@
 # hosts/vesuvio/default.nix
-{ pkgs, inputs, outputs, ... }:
-
+{
+  pkgs,
+  inputs,
+  outputs,
+  ...
+}:
+let
+  packages = import ../common/packages.nix { inherit pkgs; };
+in
 {
   imports = [
     ../common/darwin.nix
   ];
+
+  _module.args = {
+    user = "schmas";
+  };
 
   # Set Git commit hash for darwin-version.
   system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
@@ -17,9 +28,9 @@
 
   # It me
   # Set fish as the default shell
-  users.knownUsers = [ "${outputs.user}" ];
+  users.knownUsers = [ "schmas" ];
   users.users.schmas = {
-    home = "/Users/${outputs.user}";
+    home = "/Users/schmas";
     uid = 501;
     isHidden = false;
     shell = pkgs.fish;
@@ -27,7 +38,22 @@
 
   home-manager = {
     users = {
-      schmas = import ../../home/${outputs.user}/macos.nix;
+      schmas = { inputs, outputs, pkgs, ... }: {
+        imports = [ ../../home/schmas/vesuvio.nix ];
+        home.packages = packages.all-packages;
+      };
     };
   };
+
+  # homebrew = {
+  #   enable = true;
+  #   # brews = darwinPackages.brews;
+  #   # casks = darwinPackages.casks;
+  #   onActivation = {
+  #     cleanup = "zap";
+  #     autoUpdate = true;
+  #     upgrade = true;
+  #   };
+  # };
+
 }

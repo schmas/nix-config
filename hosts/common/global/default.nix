@@ -4,6 +4,7 @@
     [
       ./nix.nix
       ./shells.nix
+      ./fonts.nix
     ];
 
   nixpkgs = {
