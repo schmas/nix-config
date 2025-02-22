@@ -1,7 +1,13 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+let home-base-dir = "Users"; in
+{
   imports = [
     ./global
   ];
+
+  _module.args = {
+    home-base-dir = "Users";
+  };
 
   # # Purple
   # wallpaper = pkgs.wallpapers.aenami-lost-in-between;

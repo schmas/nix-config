@@ -13,9 +13,9 @@
 
   # It me
   # Set fish as the default shell
-  users.knownUsers = [ "schmas" ];
+  users.knownUsers = [ "${outputs.user}" ];
   users.users.schmas = {
-    home = "/Users/schmas";
+    home = "/Users/${outputs.user}";
     uid = 501;
     isHidden = false;
     # shell = pkgs.fish;
@@ -25,7 +25,7 @@
     # This is optional, can be removed if you want to use home-manager's only
     users = {
       # Import your home-manager configuration
-      schmas = import ../../home/schmas/macos.nix;
+      schmas = import ../../home/${outputs.user}/macos.nix;
     };
   };
 }

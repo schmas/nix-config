@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, config, outputs, ... }: {
+{ inputs, lib, pkgs, config, outputs, home-base-dir ? "home", ... }: {
   imports = [ ] ++ (builtins.attrValues outputs.homeManagerModules);
 
   nix = {
@@ -13,12 +13,12 @@
 
   programs = {
     home-manager.enable = true;
-    git.enable = true;
+    # git.enable = true;
   };
 
   home = {
-    username = lib.mkDefault "schmas";
-    homeDirectory = lib.mkDefault "/home/${config.home.username}";
+    username = lib.mkDefault "${outputs.user}";
+    homeDirectory = lib.mkDefault "/${home-base-dir}/${config.home.username}";
     stateVersion = lib.mkDefault "25.05";
     sessionPath = [ "$HOME/.local/bin" ];
     # sessionVariables = { FLAKE = "$HOME/Documents/NixConfig"; };
