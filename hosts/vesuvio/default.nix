@@ -55,6 +55,13 @@ in
       autoUpdate = true;
       upgrade = true;
     };
+    masApps = {
+      "1Password for Safari" = 1569813296;
+      "World Clock" = 956377119;
+      "iStat Menus" = 6499559693;
+      "The Unarchiver" = 425424353;
+      "Virtual Display Pro" = 6467809379;
+    };
   };
 
 }

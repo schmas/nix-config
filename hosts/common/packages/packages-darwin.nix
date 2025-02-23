@@ -55,7 +55,8 @@ let
     "notion-calendar"
     "pixelsnap"
     "rectangle-pro"
-    "transnomino"
+    "transnomino" # batch renamer
+    "clop" # Image, video, PDF and clipboard optimiser
 
     # Development Tools
     "ghostty"
