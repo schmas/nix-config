@@ -39,10 +39,17 @@ in
 
   home-manager = {
     users = {
-      schmas = { inputs, outputs, pkgs, ... }: {
-        imports = [ ../../home/schmas/vesuvio.nix ];
-        home.packages = darwinPackages.packages;
-      };
+      schmas =
+        {
+          inputs,
+          outputs,
+          pkgs,
+          ...
+        }:
+        {
+          imports = [ ../../home/schmas/vesuvio.nix ];
+          home.packages = darwinPackages.packages;
+        };
     };
   };
 
@@ -55,13 +62,17 @@ in
       autoUpdate = true;
       upgrade = true;
     };
-    masApps = {
-      "1Password for Safari" = 1569813296;
-      "World Clock" = 956377119;
-      "iStat Menus" = 6499559693;
-      "The Unarchiver" = 425424353;
-      "Virtual Display Pro" = 6467809379;
-    };
+    masApps =
+      if isTesting then
+        { }
+      else
+        {
+          "1Password for Safari" = 1569813296;
+          "World Clock" = 956377119;
+          "iStat Menus" = 6499559693;
+          "The Unarchiver" = 425424353;
+          "Virtual Display Pro" = 6467809379;
+        };
   };
 
 }
