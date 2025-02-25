@@ -2,22 +2,22 @@
   description = "My Nix configuration";
 
   nixConfig = {
-    extra-substituters = [
-      "https://cache.m7.rs"
-      "https://cache.nixos.org"
-      "https://nix-community.cachix.org"
-      "https://tree-grepper.cachix.org"
-    ];
+    # extra-substituters = [
+    #   "https://cache.m7.rs"
+    #   "https://cache.nixos.org"
+    #   "https://nix-community.cachix.org"
+    #   "https://tree-grepper.cachix.org"
+    # ];
 
-    # cachix use tree-grepper -O /tmp/cachix-conf
-    trusted-public-keys = [
-      "cache.m7.rs:kszZ/NSwE/TjhOcPPQ16IuUiuRSisdiIwhKZCxguaWg="
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "tree-grepper.cachix.org-1:Tm/owXM+dl3GnT8gZg+GTI3AW+yX1XFVYXspZa7ejHg="
-    ];
+    # # cachix use tree-grepper -O /tmp/cachix-conf
+    # trusted-public-keys = [
+    #   "cache.m7.rs:kszZ/NSwE/TjhOcPPQ16IuUiuRSisdiIwhKZCxguaWg="
+    #   "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    #   "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    #   "tree-grepper.cachix.org-1:Tm/owXM+dl3GnT8gZg+GTI3AW+yX1XFVYXspZa7ejHg="
+    # ];
 
-    trusted-users = [ "root" "@admin" "schmas" ];
+    # trusted-users = [ "root" "@admin" "schmas" ];
   };
 
   inputs = {
