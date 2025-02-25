@@ -16,7 +16,7 @@ let
   # Brew packages
   brews = [
     "urlview"
-    "mise"
+    # "mise"
     "openssl"
   ];
 

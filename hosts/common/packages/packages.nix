@@ -91,6 +91,7 @@ let
 
     dev = [
       mise
+      usage
     ];
 
     container = {
