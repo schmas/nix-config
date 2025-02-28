@@ -83,14 +83,14 @@
     local.dock.entries = [
       { path = "/System/Applications/Launchpad.app/"; }
       { path = "/System/Applications/Reminders.app/"; }
-      { path = "/System/Applications/Notes.app/"; }
-      { path = "/System/Applications/Messages.app/"; }
-      { path = "/System/Applications/iPhone Mirroring.app/"; }
-      { path = "/System/Applications/System Settings.app/"; }
+      # { path = "/System/Applications/Notes.app/"; }
+      # { path = "/System/Applications/Messages.app/"; }
+      # { path = "/System/Applications/iPhone Mirroring.app/"; }
+      # { path = "/System/Applications/System Settings.app/"; }
       { type = "spacer"; }
       { path = "/Applications/Ghostty.app/"; }
-      { path = "/Applications/Visual Studio Code.app/"; }
-      { type = "spacer"; }
+      # { path = "/Applications/Visual Studio Code.app/"; }
+      # { type = "spacer"; }
       {
         path = "${config.users.users.${user}.home}/";
         section = "others";
