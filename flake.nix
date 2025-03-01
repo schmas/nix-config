@@ -107,21 +107,15 @@
             isTesting = true;
           };
         };
-
-        # Work desktop
-        # popos = lib.nixosSystem {
-        #   modules = [ ./hosts/popos ];
-        #   specialArgs = { inherit inputs outputs; };
-        # };
       };
 
-      # nixosConfigurations = {
-      #   # Work desktop
-      #   # popos = lib.nixosSystem {
-      #   #   modules = [ ./hosts/popos ];
-      #   #   specialArgs = { inherit inputs outputs; };
-      #   # };
-      # };
+      nixosConfigurations = {
+        # Work desktop
+        helka = lib.nixosSystem {
+          modules = [ ./hosts/helka ];
+          specialArgs = { inherit inputs outputs; };
+        };
+      };
 
       # homeConfigurations = {
       #   # Standalone HM only

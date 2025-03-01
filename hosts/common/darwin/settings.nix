@@ -1,8 +1,19 @@
-{ config, user, pkgs, ... }: {
+{
+  config,
+  user,
+  pkgs,
+  ...
+}:
+{
   imports = [ ./dock ];
 
   config = {
-    security = { pam = { enableSudoTouchIdAuth = true; }; };
+    security.pam.services.sudo_local = {
+      enable = true;
+      reattach = true;
+      touchIdAuth = true;
+      watchIdAuth = true;
+    };
 
     system = {
       defaults = {
@@ -55,8 +66,7 @@
 
           # Keep folders on top
           _FXSortFoldersFirst = true; # Keep folders on top when sorting by name
-          _FXSortFoldersFirstOnDesktop =
-            true; # Keep folders on top on Desktop too
+          _FXSortFoldersFirstOnDesktop = true; # Keep folders on top on Desktop too
 
           # New window behavior
           NewWindowTarget = "Home"; # "PfHm" represents the Home folder
