@@ -112,6 +112,7 @@
       nixosConfigurations = {
         # Work desktop
         helka = lib.nixosSystem {
+          system = "aarch64-linux";
           modules = [ ./hosts/helka ];
           specialArgs = { inherit inputs outputs; };
         };
