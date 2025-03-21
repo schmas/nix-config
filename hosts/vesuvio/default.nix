@@ -58,7 +58,7 @@ in
     brews = darwinPackages.brews;
     casks = darwinPackages.casks;
     onActivation = {
-      cleanup = "zap";
+      cleanup = "none";
       autoUpdate = true;
       upgrade = true;
     };

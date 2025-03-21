@@ -53,6 +53,7 @@ let
     "neohtop"
     "notion"
     "notion-calendar"
+    "obsidian"
     "pixelsnap"
     "rectangle-pro"
     "transnomino" # batch renamer
@@ -64,6 +65,7 @@ let
     "podman-desktop"
     "postman"
     "visual-studio-code"
+    "cursor"
     "zed"
 
     # Browsers & Communication
