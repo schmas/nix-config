@@ -48,10 +48,6 @@ fi
 
 echo "Installing Nix configuration for $SYSTEM..."
 
-# Install Nix
-echo "Installing Nix..."
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-
 # macOS specific setup
 if [ "$SYSTEM" = "macos" ]; then
     # Install Command Line Tools
@@ -65,6 +61,16 @@ if [ "$SYSTEM" = "macos" ]; then
     # Install Rosetta
     echo "Installing Rosetta..."
     softwareupdate --install-rosetta --agree-to-license
+fi
+
+# Check if Nix is installed
+if ! command -v nix &>/dev/null; then
+    echo "Installing Nix..."
+    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+    # Source nix
+    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+else
+    echo "Nix is already installed, skipping installation..."
 fi
 
 # Clone and setup nix-config
