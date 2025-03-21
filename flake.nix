@@ -26,18 +26,6 @@
     nix-homebrew = {
       url = "github:zhaofengli-wip/nix-homebrew";
     };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
     mac-app-util.url = "github:hraban/mac-app-util";
 
   };
@@ -49,9 +37,6 @@
       home-manager,
       nix-darwin,
       nix-homebrew,
-      homebrew-bundle,
-      homebrew-core,
-      homebrew-cask,
       mac-app-util,
       systems,
       ...

@@ -36,12 +36,7 @@
     enable = true;
     enableRosetta = true;
     user = "${user}";
-    taps = {
-      "homebrew/homebrew-core" = inputs.homebrew-core;
-      "homebrew/homebrew-cask" = inputs.homebrew-cask;
-      "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
-    };
-    mutableTaps = false;
-    autoMigrate = true;
+    mutableTaps = true;
+    # autoMigrate = true;
   };
 }
