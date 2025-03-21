@@ -18,6 +18,7 @@ let
     "urlview"
     # "mise"
     "openssl"
+    "thefuck"
   ];
 
   # Casks
