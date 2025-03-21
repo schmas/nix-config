@@ -16,9 +16,7 @@ let
   # Brew packages
   brews = [
     "urlview"
-    # "mise"
     "openssl"
-    "thefuck"
   ];
 
   # Casks

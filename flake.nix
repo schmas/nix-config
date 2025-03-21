@@ -36,6 +36,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-stable,
       home-manager,
       nix-darwin,
       nix-homebrew,
