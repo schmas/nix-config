@@ -2,6 +2,21 @@
 
 set -euo pipefail
 
+# Parse command line arguments
+TEST_MODE=false
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --test)
+            TEST_MODE=true
+            shift
+            ;;
+        *)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+done
+
 # Detect OS
 OS="$(uname)"
 case "$OS" in
@@ -25,6 +40,11 @@ case "$OS" in
         exit 1
         ;;
 esac
+
+# Append -test to hostname if test mode is enabled
+if [ "$TEST_MODE" = true ] && [ "$SYSTEM" = "macos" ]; then
+    HOST="${HOST}-test"
+fi
 
 echo "Installing Nix configuration for $SYSTEM..."
 

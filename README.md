@@ -7,7 +7,11 @@ This is my new (under) development dotfiles using Nix
 One-line installation (supports both macOS and Linux):
 
 ```bash
+# For full installation
 curl --proto '=https' --tlsv1.2 -sSf -L https://raw.githubusercontent.com/schmas/nix-config/main/install.sh | bash
+
+# For test installation (macOS only, installs minimal set of packages)
+curl --proto '=https' --tlsv1.2 -sSf -L https://raw.githubusercontent.com/schmas/nix-config/main/install.sh | bash -s -- --test
 ```
 
 The installer will:
