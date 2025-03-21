@@ -19,6 +19,9 @@
     stateVersion = lib.mkDefault "25.05";
     sessionPath = [ "$HOME/bin" "$HOME/.local/bin" ];
     # sessionVariables = { FLAKE = "$HOME/Documents/NixConfig"; };
+    shellAliases = {
+      setup-my-dotfiles = "chezmoi init --apply schmas";
+    };
   };
 
   home.packages = with pkgs; [];
