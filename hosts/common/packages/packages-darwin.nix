@@ -38,7 +38,7 @@ let
 
     # Productivity & Utilities
     "alfred"
-    "alt-tab"
+    # "alt-tab"
     "bartender"
     "cleanmymac"
     "cleanshot"
