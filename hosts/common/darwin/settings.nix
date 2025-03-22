@@ -37,11 +37,10 @@
           InitialKeyRepeat = 15;
 
           "com.apple.keyboard.fnState" = true;
-          "com.apple.swipescrolldirection" = true;
         };
 
         dock = {
-          autohide = false;
+          autohide = true;
           show-recents = false;
           launchanim = false;
           expose-animation-duration = 0.1;
@@ -97,7 +96,7 @@
       # { path = "/System/Applications/Messages.app/"; }
       # { path = "/System/Applications/iPhone Mirroring.app/"; }
       # { path = "/System/Applications/System Settings.app/"; }
-      { type = "spacer"; }
+      # { type = "spacer"; }
       { path = "/Applications/Ghostty.app/"; }
       # { path = "/Applications/Visual Studio Code.app/"; }
       # { type = "spacer"; }
