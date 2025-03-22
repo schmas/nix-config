@@ -33,7 +33,7 @@
           NSAutomaticQuoteSubstitutionEnabled = false;
           NSAutomaticSpellingCorrectionEnabled = false;
           ApplePressAndHoldEnabled = false;
-          KeyRepeat = 2;
+          KeyRepeat = 1;
           InitialKeyRepeat = 15;
 
           "com.apple.keyboard.fnState" = true;
@@ -101,11 +101,11 @@
       { path = "/Applications/Ghostty.app/"; }
       # { path = "/Applications/Visual Studio Code.app/"; }
       # { type = "spacer"; }
-      {
-        path = "${config.users.users.${user}.home}/";
-        section = "others";
-        options = "--sort name --view list --display folder";
-      }
+      # {
+      #   path = "${config.users.users.${user}.home}/";
+      #   section = "others";
+      #   options = "--sort name --view list --display folder";
+      # }
       {
         path = "${config.users.users.${user}.home}/Downloads/";
         section = "others";
