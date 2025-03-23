@@ -17,6 +17,7 @@ let
   brews = [
     "urlview"
     "openssl"
+    "podman"
   ];
 
   # Casks
