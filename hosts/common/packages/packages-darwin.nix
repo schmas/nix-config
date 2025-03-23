@@ -18,6 +18,7 @@ let
     "urlview"
     "openssl"
     "podman"
+    "podman-compose"
   ];
 
   # Casks
