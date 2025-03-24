@@ -18,6 +18,8 @@
     system = {
       defaults = {
         NSGlobalDomain = {
+          AppleInterfaceStyle = "Dark";
+          AppleInterfaceStyleSwitchesAutomatically = false;
           NSTableViewDefaultSizeMode = 2;
           AppleShowScrollBars = "Always";
           NSUseAnimatedFocusRing = false;
@@ -32,6 +34,7 @@
           NSAutomaticPeriodSubstitutionEnabled = false;
           NSAutomaticQuoteSubstitutionEnabled = false;
           NSAutomaticSpellingCorrectionEnabled = false;
+
           ApplePressAndHoldEnabled = false;
           KeyRepeat = 2;
           InitialKeyRepeat = 15;
