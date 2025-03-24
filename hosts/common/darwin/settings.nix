@@ -33,7 +33,7 @@
           NSAutomaticQuoteSubstitutionEnabled = false;
           NSAutomaticSpellingCorrectionEnabled = false;
           ApplePressAndHoldEnabled = false;
-          KeyRepeat = 1;
+          KeyRepeat = 2;
           InitialKeyRepeat = 15;
 
           "com.apple.keyboard.fnState" = true;
