@@ -25,6 +25,7 @@ in
 
   networking = {
     hostName = "vesuvio";
+    localHostName = "vesuvio";
   };
 
   # It me
