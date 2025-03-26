@@ -93,12 +93,13 @@
     # Fully declarative dock using the latest from Nix Store
     local.dock.enable = true;
     local.dock.entries = [
+      { path = "/System/Applications/System Settings.app/"; }
       { path = "/System/Applications/Launchpad.app/"; }
       { path = "/System/Applications/Reminders.app/"; }
       # { path = "/System/Applications/Notes.app/"; }
       # { path = "/System/Applications/Messages.app/"; }
       # { path = "/System/Applications/iPhone Mirroring.app/"; }
-      # { path = "/System/Applications/System Settings.app/"; }
+
       # { type = "spacer"; }
       { path = "/Applications/Ghostty.app/"; }
       # { path = "/Applications/Visual Studio Code.app/"; }
