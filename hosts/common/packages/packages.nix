@@ -97,6 +97,7 @@ let
         setuptools
         wheel
       ]))
+      nixd
     ];
 
     container = {
