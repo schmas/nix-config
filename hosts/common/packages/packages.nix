@@ -64,6 +64,7 @@ let
       watch
       xz
       envsubst
+      fswatch
     ];
 
     vcs = [
@@ -92,11 +93,13 @@ let
     dev = [
       mise
       usage
-      (python3.withPackages(ps: with ps; [
-        pip
-        setuptools
-        wheel
-      ]))
+      (python3.withPackages (
+        ps: with ps; [
+          pip
+          setuptools
+          wheel
+        ]
+      ))
       nixd
     ];
 
