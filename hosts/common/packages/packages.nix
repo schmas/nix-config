@@ -17,6 +17,7 @@ let
       gnused
       unixtools.watch
       gnutar
+      fswatch
     ];
 
     tools = [
@@ -64,7 +65,6 @@ let
       watch
       xz
       envsubst
-      fswatch
     ];
 
     vcs = [
