@@ -1,6 +1,7 @@
 {
   inputs,
   lib,
+  config,
   ...
 }:
 let
@@ -18,7 +19,7 @@ in
       flake-registry = ""; # Disable global flake registry
     };
 
-    gc = {
+    gc = lib.mkIf config.nix.enable {
       automatic = true;
       interval = {
         Weekday = 1;

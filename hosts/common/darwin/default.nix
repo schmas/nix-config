@@ -19,6 +19,9 @@
     ];
 
   nix = {
+    # Disable nix-darwin's Nix management when using Determinate Systems Nix
+    enable = false;
+
     settings = {
       trusted-users = [ "@admin" "${user}" ];
     };

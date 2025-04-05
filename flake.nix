@@ -5,12 +5,18 @@
     # Nix ecosystem
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+
+    # nix.url = "https://flakehub.com/f/DeterminateSystems/nix/2.0";
+    # nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*";
+    # nixpkgs-stable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2411.*";
+
     systems.url = "github:nix-systems/default";
 
     hardware.url = "github:nixos/nixos-hardware";
 
     home-manager = {
       url = "github:nix-community/home-manager";
+      #url = "https://flakehub.com/f/nix-community/home-manager/*";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
@@ -20,7 +26,7 @@
 
     # Darwin-specific packages
     nix-darwin = {
-      url = "github:LnL7/nix-darwin/master";
+      url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
