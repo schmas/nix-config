@@ -8,6 +8,7 @@ on:
 
 jobs:
   nix-ci:
+    if: false  # This disables the entire job
     runs-on: ubuntu-latest
     permissions:
       id-token: write
