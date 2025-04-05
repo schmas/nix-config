@@ -18,6 +18,7 @@ let
       unixtools.watch
       gnutar
       fswatch
+      fh
     ];
 
     tools = [
