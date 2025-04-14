@@ -37,7 +37,7 @@
 
           ApplePressAndHoldEnabled = false;
           KeyRepeat = 2;
-          InitialKeyRepeat = 15;
+          InitialKeyRepeat = 25;
 
           "com.apple.keyboard.fnState" = true;
         };
