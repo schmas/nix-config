@@ -36,8 +36,8 @@
           NSAutomaticSpellingCorrectionEnabled = false;
 
           ApplePressAndHoldEnabled = false;
-          # KeyRepeat = 2;
-          # InitialKeyRepeat = 25;
+          KeyRepeat = 2;
+          InitialKeyRepeat = 15;
 
           "com.apple.keyboard.fnState" = true;
         };
