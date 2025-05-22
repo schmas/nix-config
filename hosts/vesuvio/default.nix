@@ -38,6 +38,9 @@ in
     shell = pkgs.fish;
   };
 
+  # Set primary user for nix-darwin
+  system.primaryUser = "schmas";
+
   home-manager = {
     users = {
       schmas =
