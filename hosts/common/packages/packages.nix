@@ -62,7 +62,7 @@ let
       nixfmt-rfc-style
       reattach-to-user-namespace
       shfmt
-      urlscan
+      # urlscan
       watch
       xz
       envsubst
