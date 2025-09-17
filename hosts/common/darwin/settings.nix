@@ -48,7 +48,7 @@
           launchanim = false;
           expose-animation-duration = 0.1;
           mineffect = "scale";
-          minimize-to-application = true;
+          minimize-to-application = false;
           mouse-over-hilite-stack = true;
           mru-spaces = false;
           showhidden = true;
