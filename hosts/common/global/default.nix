@@ -13,7 +13,7 @@
       allowUnfree = true;
       allowBroken = true;
       allowInsecure = false;
-      allowUnsupportedSystem = true;
+      allowUnsupportedSystem = false;
     };
   };
 }

@@ -7,9 +7,19 @@
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
-    # example = prev.example.overrideAttrs (oldAttrs: rec {
-    # ...
-    # });
+    # Disable GTK+3 builds on Darwin by making it unsupported
+    gtk3 = prev.gtk3.overrideAttrs (oldAttrs: {
+      meta = oldAttrs.meta // {
+        platforms = final.lib.platforms.linux;
+      };
+    });
+    
+    # Disable putty on Darwin (it depends on GTK+3)
+    putty = prev.putty.overrideAttrs (oldAttrs: {
+      meta = oldAttrs.meta // {
+        platforms = final.lib.platforms.linux;
+      };
+    });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
