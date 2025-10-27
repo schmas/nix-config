@@ -26,7 +26,7 @@ in
         Hour = 11;
         Minute = 0;
       };
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 7d";
     };
 
     # Add each flake input as a registry and nix_path
