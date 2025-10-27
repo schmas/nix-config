@@ -1,10 +1,11 @@
-# on:
-#   workflow_dispatch: # allows manual triggering
-#   schedule:
-#     - cron: '0 0 * * 0' # runs weekly on Sunday at 00:00
+on:
+  workflow_dispatch: # allows manual triggering
+  schedule:
+    - cron: '0 0 * * 0' # runs weekly on Sunday at 00:00
 
 jobs:
   update-flake-inputs:
+    if: false  # This disables the entire job
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
