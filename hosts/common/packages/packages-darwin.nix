@@ -1,16 +1,14 @@
 {
   pkgs,
-  isTesting,
   ...
 }:
 
 with pkgs;
 let
-  dummy = builtins.trace "isTesting value is: ${toString isTesting}" null;
-
   # Darwin-specific packages
   darwinSpecificPackages = with pkgs; [
     dockutil
+    reattach-to-user-namespace
   ];
 
   # Brew packages
@@ -22,15 +20,7 @@ let
   ];
 
   # Casks
-  testingCasks = [
-    "1password"
-    "ghostty"
-    "google-chrome"
-    "visual-studio-code"
-    "zed"
-  ];
-
-  fullCasks = [
+  casks = [
     # Security & Privacy
     "1password"
     "gpg-suite-no-mail"
@@ -110,9 +100,7 @@ let
   ) allPackages;
 
 in
-# debug = builtins.trace "Shared packages: ${toString (map (p: p.name or p.pname) sharedPackages)}" true;
 {
   packages = filteredPackages;
-  inherit brews;
-  casks = builtins.seq dummy (if isTesting then fullCasks else fullCasks);
+  inherit brews casks;
 }

@@ -1,13 +1,13 @@
-# hosts/vesuvio/default.nix
+# hosts/helka/default.nix
 {
   pkgs,
   inputs,
   outputs,
-  isTesting,
   ...
 }:
 let
-  sharedPackages = import ./packages.nix { inherit pkgs; };
+  sharedPackages = import ../common/packages/packages.nix { inherit pkgs; };
+  user = "schmas";
 in
 {
   imports = [
@@ -15,26 +15,36 @@ in
   ];
 
   _module.args = {
-    user = "schmas";
+    inherit user;
   };
+
+  system.stateVersion = "25.05";
 
   networking = {
     hostName = "helka";
   };
 
+  # Boot and filesystem configuration (hardware-specific, update as needed)
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/nixos";
+    fsType = "ext4";
+  };
+
   # It me
   # Set fish as the default shell
-  users.knownUsers = [ "schmas" ];
-  users.users.schmas = {
-    home = "/home/schmas";
-    uid = 501;
-    isHidden = false;
+  users.users.${user} = {
+    home = "/home/${user}";
+    isNormalUser = true;
     shell = pkgs.fish;
+    extraGroups = [ "wheel" ];
   };
 
   home-manager = {
     users = {
-      schmas =
+      ${user} =
         {
           inputs,
           outputs,
@@ -42,11 +52,11 @@ in
           ...
         }:
         {
-          imports = [ ../../home/schmas/vesuvio.nix ];
+          imports = [ ../../home/${user}/helka.nix ];
+          home.packages = sharedPackages.all-packages;
         };
     };
   };
 
-  environment.systemPackages = with pkgs; [
-  ] ++ sharedPackages.all-packages;
+  environment.systemPackages = [ ];
 }

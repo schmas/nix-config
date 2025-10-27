@@ -27,6 +27,13 @@
     };
   };
 
+  # Determinate Nix garbage collection configuration
+  environment.etc."determinate/config.json".text = builtins.toJSON {
+    garbageCollector = {
+      strategy = "automatic";
+    };
+  };
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

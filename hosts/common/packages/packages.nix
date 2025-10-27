@@ -60,7 +60,6 @@ let
       ast-grep
       mas
       nixfmt-rfc-style
-      reattach-to-user-namespace
       shfmt
       # urlscan
       watch
@@ -104,13 +103,14 @@ let
       nixd
     ];
 
-    container = {
-      podman = [
-        podman
-        podman-tui
-        podman-compose
-      ];
-    };
+    container = [
+      podman
+      podman-tui
+      podman-compose
+    ];
+
+    # Note: openssl, podman, and podman-compose are installed via Homebrew on Darwin
+    # as the Nix versions don't work well on macOS
 
     security = [
       age
@@ -144,7 +144,7 @@ in
     ++ packages_dict.monitoring
     ++ packages_dict.network
     ++ packages_dict.dev
-    ++ packages_dict.container.podman
+    ++ packages_dict.container
     ++ packages_dict.security
     ++ packages_dict.packaging;
 }

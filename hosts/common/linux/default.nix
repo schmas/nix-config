@@ -5,8 +5,14 @@
     [ inputs.home-manager.nixosModules.home-manager ]
     ++ (builtins.attrValues outputs.nixosModules)
     ++ [
-      ./global
+      ../global
     ];
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;

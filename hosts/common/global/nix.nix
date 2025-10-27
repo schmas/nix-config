@@ -1,7 +1,6 @@
 {
   inputs,
   lib,
-  config,
   ...
 }:
 let
@@ -17,16 +16,6 @@ in
       ];
       warn-dirty = false;
       flake-registry = ""; # Disable global flake registry
-    };
-
-    gc = lib.mkIf config.nix.enable {
-      automatic = true;
-      interval = {
-        Weekday = 1;
-        Hour = 11;
-        Minute = 0;
-      };
-      options = "--delete-older-than 7d";
     };
 
     # Add each flake input as a registry and nix_path

@@ -5,7 +5,7 @@
     # Nix ecosystem
     # nix.url = "https://flakehub.com/f/DeterminateSystems/nix/*";
 
-    # determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
     fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -42,6 +42,7 @@
       self,
       nixpkgs,
       nixpkgs-stable,
+      determinate,
       fh,
       home-manager,
       nix-darwin,
@@ -81,24 +82,12 @@
         "vesuvio" = lib.darwinSystem {
           system = "aarch64-darwin";
           modules = [
+            determinate.darwinModules.default
             mac-app-util.darwinModules.default
             ./hosts/vesuvio
           ];
           specialArgs = {
             inherit inputs outputs;
-            isTesting = false;
-          };
-        };
-
-        "vesuvio-test" = lib.darwinSystem {
-          system = "aarch64-darwin";
-          modules = [
-            mac-app-util.darwinModules.default
-            ./hosts/vesuvio
-          ];
-          specialArgs = {
-            inherit inputs outputs;
-            isTesting = true;
           };
         };
       };
