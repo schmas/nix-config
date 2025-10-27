@@ -1,0 +1,33 @@
+---
+alwaysApply: true
+---
+
+When working on plans use the following statuses
+
+- analysis: code analysis that can inform new requests/planning or serve as standalone analysis
+- requests: initial context to create a plan with
+- planning: requests that have clarity, planning is in progress to define the task
+- in-progress: the current task thats in progress, should be only 1 in most cases
+- done: completed tasks
+- on-hold: tasks that may restart
+- canceled: requests or plans that are stopped with no intention to restart
+
+Guidelines
+
+- track plans in `.tasks`
+- **ALWAYS MOVE files** between status directories - never copy or duplicate them
+- move files to sub-directory applicable to the status (e.g. move to `.tasks/in-progress` when code changes start)
+- all task files must be prefixed with a sequence ID (4 hex chars) from `.tasks/.sequence`
+- when creating new task files: read `.tasks/.sequence`, increment the hex value, update the file, and prefix the filename with the new ID
+
+Task Flow Example
+
+A task file `0011-xxxx.md` follows this progression:
+
+1. Starts in `.tasks/analysis` or `.tasks/requests`
+2. Move to `.tasks/planning` when planning begins
+3. Move to `.tasks/in-progress` when code changes start
+4. Move to `.tasks/done` only when:
+   - User explicitly asks to mark it as done
+   - Agent asks user for confirmation and user approves
+   - User manually moves it

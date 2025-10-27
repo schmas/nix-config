@@ -114,5 +114,5 @@ in
 {
   packages = filteredPackages;
   inherit brews;
-  casks = builtins.seq dummy (if isTesting then testingCasks else fullCasks);
+  casks = builtins.seq dummy (if isTesting then fullCasks else fullCasks);
 }

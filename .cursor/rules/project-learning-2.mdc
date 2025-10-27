@@ -1,0 +1,48 @@
+---
+alwaysApply: false
+---
+# Project Audit
+
+I'm evaluating a new codebase. Please answer the following:
+
+---
+
+## 1. Project Overview
+
+- **What is this project about?**
+- **What goal does it achieve?**
+- **What are the main technologies or frameworks used?**
+
+---
+
+## 2. Integrations
+
+- **Which external services or platforms are integrated?**
+  - Is there integration with Google Drive? Slack? Others?
+  - What other major integrations exist (e.g., forums, APIs, cloud storage, LLMs, etc.)?
+  - Are these integrations already implemented or just planned?
+
+---
+
+## 3. MCP (Model Context Protocol)
+
+- **Does the project provide MCP (Model Context Protocol)?**
+  - What features does this MCP deliver?
+
+---
+
+## 4. Quality Assurance & Monitoring
+
+- **Does the project use Sentry, Datadog, or any similar quality assurance or monitoring tools?**
+  - If yes, which ones and how are they integrated?
+  - If not, is there any error tracking or monitoring in place?
+
+---
+
+## 5. (Optional) Summary Table
+
+- Provide a summary table of integrations, technologies, and other relevant information, if possible.
+
+---
+
+_Please answer in a way that is beginner-friendly and easy to understand. If you find evidence in the codebase, mention the relevant files or modules for reference._

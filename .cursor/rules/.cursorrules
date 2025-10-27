@@ -1,0 +1,315 @@
+# Nix Configuration Project Rules
+
+## Project Overview
+
+This is a personal Nix configuration repository using Nix Flakes to manage:
+- **macOS (Darwin)** system configuration via nix-darwin (host: vesuvio)
+- **Linux (NixOS)** system configuration (host: helka)
+- **Home Manager** for user environment across both platforms
+- **Homebrew** integration for macOS applications
+
+### Key Technologies
+- Nix Flakes (with flake.nix as the entry point)
+- nix-darwin (macOS system management)
+- home-manager (user environment)
+- nixpkgs (main package repository)
+- Homebrew (macOS cask/brew packages)
+
+## Project Structure
+
+```
+.
+├── flake.nix              # Main flake configuration and entry point
+├── flake.lock             # Locked versions of flake inputs
+├── hosts/                 # Host-specific configurations
+│   ├── common/            # Shared configuration across hosts
+│   │   ├── darwin/        # macOS-specific shared config
+│   │   ├── linux/         # Linux-specific shared config
+│   │   ├── global/        # Global shared config (nix, fonts, shells)
+│   │   └── packages/      # Package definitions
+│   ├── vesuvio/           # macOS laptop configuration
+│   └── helka/             # Linux desktop configuration
+├── home/                  # Home Manager configurations
+│   └── schmas/            # User-specific settings
+│       ├── global/        # Global user settings
+│       ├── vesuvio.nix    # macOS-specific user config
+│       └── helka.nix      # Linux-specific user config
+├── modules/               # Custom Nix modules
+│   ├── darwin/            # macOS modules
+│   ├── home-manager/      # Home Manager modules
+│   └── nixos/             # NixOS modules
+├── overlays/              # Nixpkgs overlays for custom package modifications
+├── pkgs/                  # Custom package definitions
+└── shell.nix              # Development shell environment
+```
+
+## Code Style & Conventions
+
+### Nix Language Standards
+- Use **2 spaces** for indentation (consistent with project)
+- Follow the Nix RFC 166 formatting style
+- Use `nixfmt-rfc-style` for formatting (available as `nix fmt`)
+- Use explicit attribute paths with `inherit` where appropriate
+- Prefer `let...in` blocks for local bindings
+- Use meaningful variable names (`darwinPackages`, not `dp`)
+
+### File Organization
+- Keep configurations **modular** - separate concerns into different files
+- Use `default.nix` for directory entry points
+- Import shared configurations from `hosts/common/`
+- Platform-specific code goes in respective directories (`darwin/`, `linux/`)
+
+### Package Management
+- **Categorize packages** in `packages.nix` by purpose (core, tools, dev, etc.)
+- Use structured dictionaries for package organization
+- Platform-specific packages go in `packages-darwin.nix`
+- Filter duplicates when packages exist in both Nix and Homebrew
+
+### Attribute Sets
+```nix
+# Good - explicit and organized
+{
+  imports = [
+    ../common/darwin
+    ../common/global
+  ];
+  
+  networking = {
+    hostName = "vesuvio";
+    localHostName = "vesuvio";
+  };
+}
+
+# Avoid - flat and unstructured
+{
+  imports = [ ../common/darwin ../common/global ];
+  networking.hostName = "vesuvio";
+  networking.localHostName = "vesuvio";
+}
+```
+
+## Development Workflow
+
+### Testing Changes
+```bash
+# macOS - Build configuration (user will manually apply with switch)
+darwin-rebuild build --flake ~/.config/nix-config#vesuvio
+
+# Linux - Build configuration (user will manually apply with switch)
+nixos-rebuild build --flake ~/.config/nix-config#helka
+
+# Note: Use only 'build' command. User will manually run 'switch' to apply changes.
+```
+
+### Updating Dependencies
+```bash
+# Update all flake inputs
+nix flake update --flake ~/.config/nix-config
+
+# Update specific input
+nix flake lock --update-input nixpkgs
+```
+
+### Formatting
+```bash
+# Format all Nix files
+nix fmt
+```
+
+## Common Patterns
+
+### Adding a New Package
+
+**For cross-platform packages:**
+1. Add to `hosts/common/packages/packages.nix` in appropriate category
+2. Package automatically available on both macOS and Linux
+
+**For macOS-only packages:**
+1. Add to `darwinSpecificPackages` in `packages-darwin.nix` (Nix packages)
+2. Or add to `brews` list (Homebrew CLI tools)
+3. Or add to `fullCasks` list (Homebrew GUI apps)
+
+**For Linux-only packages:**
+1. Add to appropriate location in NixOS configuration
+
+### Adding a New Host
+
+1. Create `hosts/<hostname>/default.nix`
+2. Import common configurations from `hosts/common/`
+3. Add corresponding entry in `flake.nix`:
+   - `darwinConfigurations` for macOS
+   - `nixosConfigurations` for Linux
+4. Create user home configuration in `home/schmas/<hostname>.nix`
+
+### Creating Custom Modules
+
+1. Add module to `modules/darwin/`, `modules/nixos/`, or `modules/home-manager/`
+2. Export from respective `modules/<type>/default.nix`
+3. Modules are auto-imported via `outputs.darwinModules`, etc.
+
+### Using Overlays
+
+1. Define overlay in `overlays/default.nix`
+2. Applied automatically to all hosts via `hosts/common/global/default.nix`
+3. Used for package modifications and custom versions
+
+## Important Variables
+
+- **user**: `"schmas"` (defined in flake.nix, available as `outputs.user`)
+- **isTesting**: Boolean flag to enable minimal package set for testing
+- **system**: `"aarch64-darwin"` (macOS), `"aarch64-linux"` (Linux)
+
+## Configuration Flags
+
+### nixpkgs.config
+```nix
+{
+  allowUnfree = true;      # Allow proprietary packages
+  allowBroken = true;      # Allow packages marked as broken
+  allowInsecure = false;   # Don't allow insecure packages
+  allowUnsupportedSystem = true;
+}
+```
+
+### Nix Features
+Enabled experimental features:
+- `nix-command` (new CLI)
+- `flakes` (flake support)
+- `ca-derivations` (content-addressed derivations)
+
+## Integration Points
+
+### Homebrew (macOS only)
+- Managed via `nix-homebrew` flake input
+- Casks for GUI applications
+- Brews for CLI tools not well-supported in Nix
+- Auto-update and upgrade enabled
+
+### chezmoi (Dotfiles)
+- Optional dotfiles management separate from Nix config
+- Alias: `setup-my-dotfiles` → `chezmoi init --apply schmas`
+- Not auto-applied; user must manually trigger
+
+### mac-app-util
+- Integrates macOS applications with Spotlight
+- Applied to both Darwin and Home Manager modules
+
+## Common Tasks
+
+### Add a Homebrew Cask
+```nix
+# In packages-darwin.nix
+fullCasks = [
+  "existing-app"
+  "new-app-name"  # Add here
+];
+```
+
+### Change Default Shell
+```nix
+# In hosts/<hostname>/default.nix
+users.users.schmas = {
+  shell = pkgs.fish;  # or pkgs.zsh, pkgs.bash, etc.
+};
+```
+
+### Add System Font
+```nix
+# In hosts/common/global/fonts.nix
+fonts.packages = with pkgs; [
+  nerd-fonts.jetbrains-mono
+  # Add new font here
+];
+```
+
+### Modify macOS Dock
+```nix
+# In hosts/common/darwin/dock/default.nix
+# Customize dock applications and settings
+```
+
+## Debugging
+
+### Check Configuration
+```bash
+# Show current configuration with trace
+darwin-rebuild build --flake ~/.config/nix-config#vesuvio --show-trace
+
+# Verbose build output
+darwin-rebuild build --flake ~/.config/nix-config#vesuvio --verbose
+
+# Note: Only use 'build' command. User applies changes manually with 'switch'.
+```
+
+### Inspect Package
+```bash
+# Search for package
+nix search nixpkgs <package-name>
+
+# Show package info
+nix eval nixpkgs#<package-name>.meta.description
+```
+
+### Rollback
+```bash
+# macOS - rollback to previous generation
+darwin-rebuild --rollback
+
+# Linux - rollback to previous generation  
+nixos-rebuild --rollback
+```
+
+## Best Practices
+
+1. **Keep it modular**: Don't put everything in one file
+2. **Use common configurations**: Share code between hosts via `hosts/common/`
+3. **Test before deploying**: Always use `build` commands to verify (user applies changes manually with `switch`)
+4. **Version control**: Commit flake.lock changes separately
+5. **Document special cases**: Add comments for non-obvious configurations
+6. **Prefer Nix over Homebrew**: Only use Homebrew when necessary
+7. **Stay organized**: Keep package lists categorized and sorted
+8. **Use lib functions**: Leverage `nixpkgs.lib` utilities
+9. **Handle platform differences**: Use conditional logic for macOS vs Linux
+
+## Special Considerations
+
+### isTesting Flag
+- Available for testing minimal configurations if needed
+- Installs reduced set of casks when enabled
+- Controlled via `specialArgs` in flake.nix
+- Use with caution - default to production configuration (isTesting = false)
+
+### State Version
+- `system.stateVersion = 6` for Darwin
+- `home.stateVersion = "25.05"` for Home Manager
+- **Never change** unless explicitly upgrading
+
+### Package Filtering
+- Packages listed in `brews` are filtered from Nix packages
+- Prevents duplicate installations via both Nix and Homebrew
+- Handled automatically in `packages-darwin.nix`
+
+## AI Assistant Guidelines
+
+When modifying this configuration:
+
+1. **Understand the context**: Check if change affects macOS, Linux, or both
+2. **Follow the structure**: Place code in appropriate directory
+3. **Maintain consistency**: Match existing code style and patterns
+4. **Test with build only**: Always use `darwin-rebuild build` or `nixos-rebuild build` - NEVER use `switch` (user applies manually)
+5. **Use production config**: Always reference `vesuvio` for macOS, `helka` for Linux (do NOT use test configurations)
+6. **Explain trade-offs**: Note when using Homebrew vs Nix
+7. **Consider dependencies**: Check flake inputs for required packages
+8. **Respect immutability**: Don't modify the Nix store directly
+9. **Use proper syntax**: Nix is a functional language, not imperative
+10. **Check compatibility**: Verify package availability on target platform
+11. **Document unusual choices**: Add comments for non-standard configurations
+
+## Resources
+
+- [Nix Manual](https://nixos.org/manual/nix/stable/)
+- [NixOS Manual](https://nixos.org/manual/nixos/stable/)
+- [Home Manager Manual](https://nix-community.github.io/home-manager/)
+- [nix-darwin Manual](https://daiderd.com/nix-darwin/manual/)
+- [Nixpkgs Manual](https://nixos.org/manual/nixpkgs/stable/)
+
