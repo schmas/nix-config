@@ -17,6 +17,20 @@ let
     "openssl"
     "podman"
     "podman-compose"
+    "coreutils"
+    "moreutils"
+    "findutils"
+  ];
+
+  # Packages to exclude on macOS (native versions work better)
+  # - coreutils: Nix version has a bug with tail -n on large files on macOS (returns partial output)
+  #   Homebrew's coreutils works correctly. macOS native tools also work fine.
+  # - moreutils, findutils: Excluded to use Homebrew versions for consistency
+  #   Note: Explicit references like ${pkgs.coreutils}/bin/cut still work
+  excludedPackages = [
+    "coreutils"
+    "moreutils"
+    "findutils"
   ];
 
   # Casks
@@ -94,9 +108,9 @@ let
   # Combine shared packages with Darwin-specific packages
   allPackages = sharedPackages.all-packages ++ darwinSpecificPackages;
 
-  # Filter out packages that are in Homebrew from all packages
+  # Filter out packages that are in Homebrew or excluded on macOS
   filteredPackages = builtins.filter (
-    pkg: !(builtins.elem (pkg.pname or pkg.name) brews)
+    pkg: !(builtins.elem (pkg.pname or pkg.name) (brews ++ excludedPackages))
   ) allPackages;
 
 in
