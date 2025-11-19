@@ -80,11 +80,11 @@
       darwinConfigurations = {
         # Personal/Work laptop
         "vesuvio" = lib.darwinSystem {
-          system = "aarch64-darwin";
           modules = [
             determinate.darwinModules.default
             mac-app-util.darwinModules.default
             ./hosts/vesuvio
+            { nixpkgs.hostPlatform = "aarch64-darwin"; }
           ];
           specialArgs = {
             inherit inputs outputs;
@@ -95,8 +95,10 @@
       nixosConfigurations = {
         # Work desktop
         helka = lib.nixosSystem {
-          system = "aarch64-linux";
-          modules = [ ./hosts/helka ];
+          modules = [ 
+            ./hosts/helka 
+            { nixpkgs.hostPlatform = "aarch64-linux"; }
+          ];
           specialArgs = { inherit inputs outputs; };
         };
       };
