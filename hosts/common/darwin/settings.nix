@@ -87,6 +87,13 @@
           SortColumn = "CPUUsage";
           SortDirection = 0;
         };
+
+        # Per-application custom preferences
+        CustomUserPreferences = {
+          "com.google.Chrome" = {
+            AppleLanguages = ["en-US"];
+          };
+        };
       };
     };
 
