@@ -59,7 +59,7 @@ let
     utils = [
       ast-grep
       mas
-      nixfmt-rfc-style
+      nixfmt
       shfmt
       # urlscan
       watch
