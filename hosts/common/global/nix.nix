@@ -16,6 +16,7 @@ in
       ];
       warn-dirty = false;
       flake-registry = ""; # Disable global flake registry
+      download-buffer-size = 128 * 1024 * 1024; # 128MB (default 8MB)
     };
 
     # Add each flake input as a registry and nix_path
