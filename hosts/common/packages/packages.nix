@@ -27,7 +27,7 @@ let
       fd
       fzf
       ripgrep
-      pkgs.stable.thefuck
+      pay-respects
       tree-sitter
       unar
       zoxide
