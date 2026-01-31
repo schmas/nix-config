@@ -12,7 +12,7 @@
       enable = true;
       reattach = true;
       touchIdAuth = true;
-      watchIdAuth = true;
+      watchIdAuth = false; # Disabled: Swift 5.10.1 build failure with clang-21.1.8
     };
 
     system = {
@@ -98,7 +98,8 @@
     };
 
     # Fully declarative dock using the latest from Nix Store
-    local.dock.enable = true;
+    # FIXME: Disabled until Swift 5.10.1 builds with clang-21.1.8
+    local.dock.enable = false;
     local.dock.entries = [
       { path = "/System/Applications/System Settings.app/"; }
       { path = "/System/Applications/Launchpad.app/"; }

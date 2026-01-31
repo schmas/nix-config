@@ -7,7 +7,7 @@ with pkgs;
 let
   # Darwin-specific packages
   darwinSpecificPackages = with pkgs; [
-    dockutil
+    # dockutil # FIXME: Disabled until Swift 5.10.1 builds with clang-21.1.8
     reattach-to-user-namespace
   ];
 

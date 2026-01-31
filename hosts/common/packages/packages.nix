@@ -73,7 +73,7 @@ let
       gitleaks
       gh
       lazygit
-      pre-commit
+      # pre-commit # FIXME: Disabled - depends on dotnet-sdk which depends on Swift 5.10.1 (broken with clang-21.1.8)
       diff-so-fancy
       difftastic
     ];
